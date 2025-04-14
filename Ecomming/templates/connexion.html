@@ -1,0 +1,17 @@
+
+
+{% extends 'base.html' %} {% block content %}
+<form method="post" class="my-40 w-50 mx-auto">
+    {% csrf_token %}
+    <label for="username">Nom d'utilisateur </label>
+    <br>
+    <input type="text" id="username" name="username" class="input my-4" required>
+    <br>
+    <label for="password">Mot de passe </label>
+    <br>
+    <input type="password" id="password" name="password"  class="input my-4" required>
+    <br>
+    <button type="submit" class="btn btn-primary w-full my-4">Se connecter</button>
+  </form>
+
+  {% endblock %}

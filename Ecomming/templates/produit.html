@@ -1,0 +1,14 @@
+
+{% if produit.categorie == categorie %}
+<div class="w-1/2 bg-white rounded-md p-1 h-auto">
+  <a href="{% url 'produit_detail' produit.id %}">
+    <img
+      src="{{ produit.image_couverture.url }}"
+      alt="Image 1"
+      class="aspect-square rounded-xl h-44 object-cover mb-2 shadow-md"
+    />
+    <p class="font-sans ...">{{ produit.name }}</p>
+    <p class="font-mono ...">{{ produit.prix }} fcf</p>
+  </a>
+</div>
+{% endif %}

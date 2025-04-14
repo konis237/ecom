@@ -1,0 +1,227 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="flex justify-center items-center">
+  <div class="container w-auto max-w-lg self-center my-8">
+    <div class="flex justify-center items-center flex-col p-4">
+      <button class="btn" onclick="history.back()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="size-[1.2em]">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7 7-7" />
+        </svg>
+        Retour en arrière
+      </button>
+      <div
+        class="carousel carousel-center rounded-box max-w-md space-x-4 p-4 h-80"
+      >
+        <!-- Image de couverture -->
+        <div class="carousel-item">
+          <label for="modal-couverture" class="cursor-pointer">
+            <img
+              src="{{ produit.image_couverture.url }}"
+              alt="Image du produit"
+              class="object-cover h-70 rounded-box aspect-square shadow-md hover:opacity-90 transition-opacity"
+            />
+          </label>
+        </div>
+
+        <!-- Image 1 -->
+        {% if produit.image_1 %}
+        <div class="carousel-item">
+          <label for="modal-1" class="cursor-pointer">
+            <img
+              src="{{ produit.image_1.url }}"
+              alt="Image du produit"
+              class="object-cover h-70 rounded-box aspect-square shadow-md hover:opacity-90 transition-opacity"
+            />
+          </label>
+        </div>
+        {% endif %}
+
+        <!-- Image 2 -->
+        {% if produit.image_2 %}
+        <div class="carousel-item">
+          <label for="modal-2" class="cursor-pointer">
+            <img
+              src="{{ produit.image_2.url }}"
+              alt="Image du produit"
+              class="object-cover h-70 rounded-box aspect-square shadow-md hover:opacity-90 transition-opacity"
+            />
+          </label>
+        </div>
+        {% endif %}
+
+        <!-- Image 3 -->
+        {% if produit.image_3 %}
+        <div class="carousel-item">
+          <label for="modal-3" class="cursor-pointer">
+            <img
+              src="{{ produit.image_3.url }}"
+              alt="Image du produit"
+              class="object-cover h-70 rounded-box aspect-square shadow-md hover:opacity-90 transition-opacity"
+            />
+          </label>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Modals pour chaque image -->
+      <!-- Modal Image couverture -->
+      <input type="checkbox" id="modal-couverture" class="modal-toggle" />
+      <div class="modal">
+        <div class="modal-box max-w-4xl">
+          <img
+            src="{{ produit.image_couverture.url }}"
+            alt="Image du produit"
+            class="w-full h-auto"
+          />
+          <div class="modal-action">
+            <label for="modal-couverture" class="btn">Fermer</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Image 1 -->
+      {% if produit.image_1 %}
+      <input type="checkbox" id="modal-1" class="modal-toggle" />
+      <div class="modal">
+        <div class="modal-box max-w-4xl">
+          <img
+            src="{{ produit.image_1.url }}"
+            alt="Image du produit"
+            class="w-full h-auto"
+          />
+          <div class="modal-action">
+            <label for="modal-1" class="btn">Fermer</label>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Modal Image 2 -->
+      {% if produit.image_2 %}
+      <input type="checkbox" id="modal-2" class="modal-toggle" />
+      <div class="modal">
+        <div class="modal-box max-w-4xl">
+          <img
+            src="{{ produit.image_2.url }}"
+            alt="Image du produit"
+            class="w-full h-auto"
+          />
+          <div class="modal-action">
+            <label for="modal-2" class="btn">Fermer</label>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Modal Image 3 -->
+      {% if produit.image_3 %}
+      <input type="checkbox" id="modal-3" class="modal-toggle" />
+      <div class="modal">
+        <div class="modal-box max-w-4xl">
+          <img
+            src="{{ produit.image_3.url }}"
+            alt="Image du produit"
+            class="w-full h-auto"
+          />
+          <div class="modal-action">
+            <label for="modal-3" class="btn">Fermer</label>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Ajout de la description -->
+      <div class="divider"></div>
+      <div class="collapse collapse-arrow w-full">
+        <input type="checkbox" />
+        <div class="collapse-title text-xl font-medium">
+          Description du produit
+        </div>
+        <div class="collapse-content">
+          <p class="text-base-content">{{ produit.description }}</p>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="flex justify-between items-center flex-row mb-2 w-full">
+        <h1 class="text-xl font-mono mr-4">{{ produit.name }}</h1>
+
+        <p class="text-lg font-mono">{{ produit.prix }}</p>
+      </div>
+      <div class="divider"></div>
+      <div class="flex justify-between items-center flex-row mb-2 w-full">
+        <h1 class="text-xl mr-4 font-mono">Prix :</h1>
+
+        <p class="text-lg font-mono">{{ produit.prix }}</p>
+      </div>
+      <div class="divider"></div>
+      <div class="flex justify-between items-center flex-row mb-2 w-full">
+        <h1 class="text-xl font-mono mr-4">Quantiter :</h1>
+        <div class="w-[150px] max-w-sm relative mt-4 z-">
+          <div class="relative">
+            <button
+              onclick="decreaseButton()"
+              id="decreaseButton"
+              class="absolute right-9 top-1 rounded bg-slate-800 p-1.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              type="button"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                class="w-4 h-4"
+              >
+                <path
+                  d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5h-8.5Z"
+                />
+              </svg>
+            </button>
+            <input
+              id="amountInput"
+              type="number"
+              value="1"
+              max="{{ produit.quantite }}"
+              class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md pl-3 pr-20 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+            <button
+              onclick="increaseButton({{ produit.quantite }})"
+              id="increaseButton"
+              class="absolute right-1 top-1 rounded bg-slate-800 p-1.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              type="button"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                class="w-4 h-4"
+              >
+                <path
+                  d="M8.75 3.75a.75.75 0 0 0-1.5 0v3.5h-3.5a.75.75 0 0 0 0 1.5h3.5v3.5a.75.75 0 0 0 1.5 0v-3.5h3.5a.75.75 0 0 0 0-1.5h-3.5v-3.5Z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <button class="btn btn-primary w-full" id="addToCard">
+        Ajouter au panier
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+  document.getElementById("addToCard").addEventListener("click", function () {
+    let product = {
+      id: "{{ produit.id }}",
+      name: "{{ produit.name }}",
+      price: "{{ produit.prix }}",
+    };
+    let quantity = parseInt(document.getElementById("amountInput").value);
+    console.log(product, quantity);
+    cart.addProduct(product, quantity);
+    displayCart();
+  });
+</script>
+
+{% endblock %}

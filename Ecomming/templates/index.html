@@ -1,0 +1,17 @@
+<!-- page.html -->
+{% extends 'base.html' %} {% block content %}
+
+<div class="hero bg-base-20 min-h-screen">
+  <div class="hero-content text-center">
+    <div class="max-w-md">
+      <h1 class="text-5xl font-bold">Bienvenu chez {{NomEntreprise}}</h1>
+      <p class="py-6">
+        {{DescriptionEntreprise}}
+      </p>
+      <button class="btn btn-primary">
+        <a href="{% url 'catalogue' %}"> Decouvrir le catalogue </a>
+      </button>
+    </div>
+  </div>
+</div>
+{% endblock %}

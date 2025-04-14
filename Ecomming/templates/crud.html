@@ -1,0 +1,417 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+  .modal {
+    display: none;
+}
+
+.modal.modal-open {
+    display: flex;
+}
+</style>
+<div class="container mx-auto xl:w-2/4 lg:w-2/4 md:w-2/4 w-3/4 ">
+  <div class="overflow-x-auto">
+<form method="post" class="flex flex-col gap-4 items-center justify-center my-10 bg-base-200 p-4 rounded-lg shadow-md w-auto">
+  {% csrf_token %}
+  <label for="nom_entreprise">Nom de l'entreprise :</label>
+  <input type="text" id="nom_entreprise" name="nom_entreprise" value="{{ nom_entreprise }}" class="input">
+
+  <label for="description_entreprise">Description de l'entreprise :</label>
+  <textarea  class="textarea"  id="description_entreprise" name="description_entreprise">{{ description_entreprise }}</textarea>
+
+  <button  class="btn btn-success"  type="submit" name="update_site">Enregistrer les modifications</button>
+</form>
+</div>
+</div>
+
+
+<div class="w-full flex items-center justify-center flex-col">
+  <h2>Liste des catégories</h2>
+
+  <div class="container w-auto max-w-lg self-center my-8">
+    <div class="overflow-x-auto">
+      <table class="table">
+        <!-- head -->
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Type</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <form method="post">
+            {% csrf_token %}
+            <tr>
+              <th>#</th>
+              <th>
+                <input
+                  id="name_categorie"
+                  type="text"
+                  name="name_categorie"
+                  class="input input-ghost"
+                  placeholder="Nom de la catégorie"
+                />
+              </th>
+              <td>
+                <button
+                  class="btn btn-soft btn-success w-full"
+                  name="create_categorie"
+                >
+                  Créer
+                </button>
+              </td>
+            </tr>
+          </form>
+
+          {% for categorie in categories %}
+          <form method="post">
+            {% csrf_token %}
+            <input
+              type="hidden"
+              name="id_categorie"
+              value="{{ categorie.id }}"
+            />
+
+            <tr class="bg-base-200">
+              <th>{{ categorie.id }}</th>
+              <td>
+                <input
+                  type="text"
+                  name="name_categorie"
+                  value="{{ categorie.name }}"
+                  class="input input-ghost"
+                />
+              </td>
+              <td class="flex flex-row gap-2">
+                <button
+                  class="btn btn-soft btn-primary"
+                  name="delete_categorie"
+                >
+                  Modifier
+                </button>
+                <button
+                  class="btn btn-soft btn-secondary"
+                  name="delete_categorie"
+                >
+                  Supprimer
+                </button>
+              </td>
+            </tr>
+          </form>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>Création de produit</h2>
+  <form id="createProductForm" method="post" enctype="multipart/form-data" class="w-full">
+    {% comment %} {% endcomment %} {% csrf_token %}
+    <div class="container mx-auto xl:w-3/4 lg:w-3/4 md:w-3/4 w-3/4">
+      <div class="overflow-x-auto">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Donnees</th>
+              <th>inputs</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-base-200">
+              <td>Nom</td>
+              <td>
+                <input
+                  type="text"
+                  id="name_produit"
+                  name="name_produit"
+                  placeholder="Nom Produit"
+                  class="input"
+                />
+              </td>
+            </tr>
+            {% comment %} {% endcomment %}
+            <tr class="bg-base-200">
+              <td>Description</td>
+              <td>
+                <input
+                  type="text"
+                  id="description_produit"
+                  name="description_produit"
+                  placeholder="Nom description_produit"
+                  class="input"
+                />
+              </td>
+            </tr>
+            {% comment %} {% endcomment %}
+            <tr class="bg-base-200">
+              <td>Image couverture</td>
+              <td>
+                <input
+                  type="file"
+                  class="file-input"
+                  id="Image_produit"
+                  name="Image_produit"
+                  placeholder="Nom urlImage_produit"
+                />
+              </td>
+            </tr>
+            {% comment %} {% endcomment %}
+            <tr class="bg-base-200">
+              <td>Image 1</td>
+              <td>
+                <input
+                  type="file"
+                  class="file-input"
+                  id="image_1"
+                  name="image_1"
+                  placeholder="Nom urlImage_produit"
+                />
+              </td>
+            </tr>
+            {% comment %} {% endcomment %}
+            <tr class="bg-base-200">
+              <td>Image 2</td>
+              <td>
+                <input
+                  type="file"
+                  class="file-input"
+                  id="image_2"
+                  name="image_2"
+                  placeholder="Nom urlImage_produit"
+                />
+              </td>
+            </tr>
+            {% comment %} {% endcomment %}
+            <tr class="bg-base-200">
+              <td>Image 3</td>
+              <td>
+                <input
+                  type="file"
+                  class="file-input"
+                  id="image_3"
+                  name="image_3"
+                  placeholder="Nom urlImage_produit"
+                />
+              </td>
+            </tr>
+           
+          
+            {% comment %} {% endcomment %}
+            <tr class="bg-base-200">
+              <td>prix</td>
+              <td>
+                <input
+                  type="number"
+                  id="prix_produit"
+                  name="prix_produit"
+                  placeholder="prix_produit"
+                  class="input"
+                />
+              </td>
+            </tr>
+            {% comment %} {% endcomment %}
+            <tr class="bg-base-200">
+              <td>categorie</td>
+              <td>
+                <select
+                  id="categorie_produit"
+                  name="categorie_produit"
+                  class="select"
+                >
+                  {% for categorie in categories %}
+                  <option value="{{ categorie.id }}">
+                    {{ categorie.name }}
+                  </option>
+                  {% endfor %}
+                </select>
+              </td>
+            </tr>
+
+            <tr class="bg-base-200">
+              <td>Quantité</td>
+              <td>
+                <input
+                  type="number"
+                  id="quantite_produit"
+                  name="quantite_produit"
+                  class="input"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="submit" class="btn my-2 btn-success w-full" name="create_produit">
+          Créer
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <h2>Inventaire des produits</h2>
+  <table class="table mx-auto xl:w-3/4 lg:w-3/4 md:w-3/4 w-3/4">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prix</th>
+        <th>Q</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody class="w-full">
+      {% for produit in produits %}
+      <tr class="bg-base-200">
+        <td>{{ produit.name }}</td>
+        <td>{{ produit.prix }}</td>
+        <td>{{ produit.quantite }}</td>
+
+        <td class="flex flex-row gap-2">
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="id_produit" value="{{ produit.id }}" />
+            <button class="btn btn-soft btn-secondary" name="delete_produit">
+              S
+            </button>
+          </form>
+
+          <button
+            class="btn btn-soft btn-primary"
+            onclick="modifier_produit_{{ produit.id }}.showModal()"
+          >
+            M
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% for produit in produits %}
+  <dialog id="modifier_produit_{{ produit.id }}" class="modal">
+    <div class="modal-box">
+      <form method="post">
+        {% csrf_token %}
+        <h3>Modification du produit</h3>
+        <input type="hidden" name="id_produit" value="{{ produit.id }}" />
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Donnees</th>
+              <th>inputs</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-base-200">
+              <td>Nom</td>
+              <td>
+                <input
+                  type="text"
+                  id="name_produit"
+                  name="name_produit"
+                  placeholder="Nom Produit"
+                  class="input"
+                  value="{{ produit.name }}"
+                />
+              </td>
+            </tr>
+            {% comment %} {% endcomment %}
+            <tr class="bg-base-200">
+              <td>Description</td>
+              <td>
+                <input
+                  type="text"
+                  id="description_produit"
+                  name="description_produit"
+                  placeholder="Nom description_produit"
+                  class="input"
+                  value="{{ produit.description }}"
+                />
+              </td>
+            </tr>
+            {% comment %} {% endcomment %}
+            <tr class="bg-base-200">
+              <td>image du produit</td>
+              <td>
+                <input
+                  type="file"
+                  class="file-input"
+                  id="urlImage_produit"
+                  name="urlImage_produit"
+                  value="{{ produit.image.url}}"
+                  placeholder="Nom urlImage_produit"
+                />
+              </td>
+            </tr>
+            {% comment %} {% endcomment %}
+            <tr class="bg-base-200">
+              <td>prix</td>
+              <td>
+                <input
+                  type="text"
+                  id="prix_produit"
+                  name="prix_produit"
+                  placeholder="prix_produit"
+                  class="input"
+                  value="{{ produit.prix|floatformat:0 }}"
+                />
+              </td>
+            </tr>
+            {% comment %} {% endcomment %}
+            <tr class="bg-base-200">
+              <td>categorie</td>
+              <td>
+                <select
+                  id="categorie_produit"
+                  name="categorie_produit"
+                  class="select"
+                >
+                {% for categorie in categories %}
+                <option value="{{ categorie.id }}" {% if categorie == produit.categorie %}selected{% endif %}>
+                  {{ categorie.name }}
+                </option>
+              {% endfor %}
+              
+              </select>
+              </td>
+            </tr>
+
+            <tr class="bg-base-200">
+              <td>Quantité</td>
+              <td>
+                <input
+                  type="number"
+                  id="quantite_produit"
+                  name="quantite_produit"
+                  class="input"
+                  value="{{produit.quantite}}"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="modal-action">
+          <button class="btn btn-primary" name="update_produit">
+            Modifier
+          </button>
+        </div>
+      </form>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn">Fermer</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+  {% endfor %}
+</div>
+
+<div id="loading-modal" class="modal">
+  <div class="modal-box text-center">
+    <div class="loading loading-spinner loading-lg"></div>
+    <p class="py-4">Chargement en cours...</p>
+  </div>
+</div>
+
+
+
+{% endblock %}
+``` 
