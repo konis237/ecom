@@ -47,7 +47,7 @@ def produit_detail(request, id):
 
 
 
-@login_required
+
 def crud(request):
     if request.method == 'POST':
         if 'create_categorie' in request.POST:
