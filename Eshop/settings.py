@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-i2n6syx)+5bit4e#-p(niq01f5oen7$em2+ei*5fsro@!6)j64
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ecom237.vercel.app']
 
 
 # Configuration Cloudinary (à placer AVANT INSTALLED_APPS)
